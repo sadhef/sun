@@ -49,6 +49,7 @@ const useAuthStore = create((set) => ({
   logout: () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('userRole');
     set({
       user: null,
       token: null,
@@ -56,6 +57,29 @@ const useAuthStore = create((set) => ({
       loading: false,
       error: null
     });
+  },
+
+  switchRole: (newRole) => {
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    if (currentUser) {
+      currentUser.role = newRole;
+      localStorage.setItem('user', JSON.stringify(currentUser));
+      localStorage.setItem('userRole', newRole);
+      set((state) => ({
+        user: { ...state.user, role: newRole }
+      }));
+    }
+  },
+
+  updateUser: (userData) => {
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    if (currentUser) {
+      const updatedUser = { ...currentUser, ...userData };
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      set((state) => ({
+        user: { ...state.user, ...userData }
+      }));
+    }
   },
 
   clearError: () => set({ error: null })

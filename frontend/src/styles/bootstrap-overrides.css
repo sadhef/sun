@@ -1,0 +1,78 @@
+/* Bootstrap Overrides to match original design */
+
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #f5f7fa;
+  --light-gray-bg: #f0f0f0;
+  --font-color: #333;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --danger-color: #d7685b;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --logo-color: #e49732;
+  --action-icon-color: #6d6d6d;
+}
+
+/* Override Bootstrap primary color */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #3a7bc8;
+  border-color: #3a7bc8;
+}
+
+/* Override Bootstrap text colors */
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.text-danger {
+  color: var(--danger-color) !important;
+}
+
+.text-success {
+  color: var(--success-color) !important;
+}
+
+.text-warning {
+  color: var(--warning-color) !important;
+}
+
+/* Match original font size */
+body {
+  font-size: 0.8rem;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Remove default Bootstrap margins */
+.modal-content {
+  border-radius: 0px;
+}
+
+/* Custom scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 0px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
