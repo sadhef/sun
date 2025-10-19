@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /b \"D:\\1_Workspace\\2_Development\\1_React\\training-management-system\")",
+      "Bash(findstr /i \"\\.html \\.css data\\.js\")",
+      "Bash(test -f \"D:\\1_Workspace\\2_Development\\1_React\\training-management-system\\backend\\models\\Course.js\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
