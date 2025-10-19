@@ -25,6 +25,7 @@ const RoleSwitcher = () => {
       value={selectedRole}
       onChange={handleRoleChange}
       title="Switch Role"
+      className="border border-[#e0e0e0] rounded-[5px] py-[5px] px-[5px] font-inter text-[13px] bg-white cursor-pointer"
     >
       {roles.map(role => (
         <option key={role} value={role}>{role}</option>

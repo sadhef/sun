@@ -15,6 +15,15 @@ const batchRoutes = require('./routes/batchRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const studentRoutes = require('./routes/studentRoutes');
+const trainerRoutes = require('./routes/trainerRoutes');
+const roomRoutes = require('./routes/roomRoutes');
+const scheduleRoutes = require('./routes/scheduleRoutes');
+const leaveRoutes = require('./routes/leaveRoutes');
+const invoiceRoutes = require('./routes/invoiceRoutes');
+const certificateRoutes = require('./routes/certificateRoutes');
+const rateCardRoutes = require('./routes/rateCardRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
+const reportRoutes = require('./routes/reportRoutes');
 
 dotenv.config();
 
@@ -50,6 +59,15 @@ app.use('/api/v1/batches', batchRoutes);
 app.use('/api/v1/clients', clientRoutes);
 app.use('/api/v1/courses', courseRoutes);
 app.use('/api/v1/students', studentRoutes);
+app.use('/api/v1/trainers', trainerRoutes);
+app.use('/api/v1/rooms', roomRoutes);
+app.use('/api/v1/schedules', scheduleRoutes);
+app.use('/api/v1/leaves', leaveRoutes);
+app.use('/api/v1/invoices', invoiceRoutes);
+app.use('/api/v1/certificates', certificateRoutes);
+app.use('/api/v1/rate-cards', rateCardRoutes);
+app.use('/api/v1/dashboard', dashboardRoutes);
+app.use('/api/v1/reports', reportRoutes);
 
 app.get('/api/v1/health', (req, res) => {
   res.status(200).json({ success: true, message: 'Server is running' });

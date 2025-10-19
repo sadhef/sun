@@ -2,23 +2,20 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
-import NotificationContainer from '../Common/NotificationContainer';
 
 const Layout = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className="app-container">
+    <div className="flex h-screen">
       <Sidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
 
-      <div className="main-content-wrapper">
+      <div className="flex-grow flex flex-col">
         <TopBar />
-        <div className="main-content">
+        <div className="pt-[80px] px-5 pb-5 overflow-y-auto flex-grow">
           <Outlet />
         </div>
       </div>
-
-      <NotificationContainer />
     </div>
   );
 };

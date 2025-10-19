@@ -54,38 +54,49 @@ const Sidebar = ({ collapsed, onToggle }) => {
   };
 
   return (
-    <div className={`side-menu ${collapsed ? 'collapsed' : ''}`}>
-      <div className="menu-toggle" onClick={onToggle}>
-        <i className="fas fa-bars icon"></i>
+    <div className={`bg-white border-r border-[#e0e0e0] transition-all duration-300 flex-shrink-0 pt-[60px] relative flex flex-col ${collapsed ? 'w-[70px]' : 'w-[220px]'}`}>
+      <div className={`text-2xl cursor-pointer text-[#333] py-[15px] flex items-center border-b border-[#e0e0e0] flex-shrink-0 ${collapsed ? 'px-[23px]' : 'px-[25px]'}`} onClick={onToggle}>
+        <i className="fas fa-bars text-lg min-w-[20px] text-center"></i>
       </div>
 
-      <ul className="list-unstyled">
+      <ul className="list-none p-0 m-0 flex-grow overflow-y-auto [scrollbar-color:transparent_transparent] hover:[scrollbar-color:#ccc_transparent]">
         {visibleMenu.map(item => (
-          <li key={item.id} className={item.submenu ? 'has-submenu' + (openSubmenu === item.id ? ' open' : '') : ''}>
+          <li key={item.id} className={item.submenu ? 'group' : ''}>
             {item.submenu ? (
               <>
-                <a href="#" onClick={(e) => { e.preventDefault(); toggleSubmenu(item.id); }}>
-                  <i className={`fas ${item.icon} icon`}></i>
-                  <span className="text">{item.label}</span>
-                  <i className="fas fa-chevron-down submenu-toggle-icon"></i>
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); toggleSubmenu(item.id); }}
+                  className="relative flex items-center py-[15px] px-[25px] text-[#333] no-underline whitespace-nowrap overflow-hidden hover:bg-[#f5f7fa]"
+                >
+                  <i className={`fas ${item.icon} text-[1.2rem] min-w-[20px] text-center`}></i>
+                  <span className={`ml-[15px] transition-opacity duration-200 ${collapsed ? 'opacity-0 w-0 pointer-events-none' : ''}`}>{item.label}</span>
+                  <i className={`fas fa-chevron-down absolute right-5 top-1/2 -translate-y-1/2 transition-transform duration-300 ease text-[0.8em] ${openSubmenu === item.id ? 'rotate-180' : ''} ${collapsed ? 'opacity-0 w-0 pointer-events-none' : ''}`}></i>
                 </a>
-                <ul className="submenu">
+                <ul className={`list-none p-0 m-0 bg-[#f5f7fa] overflow-hidden transition-[max-height] duration-300 ease-out ${openSubmenu === item.id ? 'max-h-[500px]' : 'max-h-0'} ${collapsed ? 'hidden' : ''}`}>
                   {item.submenu
                     .filter(subItem => (subItem.roles || item.roles).includes(userRole))
                     .map(subItem => (
                       <li key={subItem.id}>
-                        <Link to={subItem.path} className={isActive(subItem.path) ? 'active' : ''}>
-                          <i className={`fas ${subItem.icon} icon`}></i>
-                          <span className="text">{subItem.label}</span>
+                        <Link
+                          to={subItem.path}
+                          className={`flex items-center py-[15px] px-[25px] text-[#333] no-underline whitespace-nowrap overflow-hidden hover:bg-[#f5f7fa] ${isActive(subItem.path) ? 'bg-[#f0f0f0] text-[#4a90e2] font-bold' : ''}`}
+                          style={{ paddingLeft: '35px' }}
+                        >
+                          <i className={`fas ${subItem.icon} text-[1rem] min-w-[20px] text-center`}></i>
+                          <span className={`ml-[15px] transition-opacity duration-200 ${collapsed ? 'opacity-0 w-0 pointer-events-none' : ''}`}>{subItem.label}</span>
                         </Link>
                       </li>
                     ))}
                 </ul>
               </>
             ) : (
-              <Link to={item.path} className={isActive(item.path) ? 'active' : ''}>
-                <i className={`fas ${item.icon} icon`}></i>
-                <span className="text">{item.label}</span>
+              <Link
+                to={item.path}
+                className={`flex items-center py-[15px] px-[25px] text-[#333] no-underline whitespace-nowrap overflow-hidden hover:bg-[#f5f7fa] ${isActive(item.path) ? 'bg-[#f0f0f0] text-[#4a90e2] font-bold' : ''}`}
+              >
+                <i className={`fas ${item.icon} text-[1.2rem] min-w-[20px] text-center`}></i>
+                <span className={`ml-[15px] transition-opacity duration-200 ${collapsed ? 'opacity-0 w-0 pointer-events-none' : ''}`}>{item.label}</span>
               </Link>
             )}
           </li>

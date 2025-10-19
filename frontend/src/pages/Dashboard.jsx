@@ -119,16 +119,22 @@ function Dashboard() {
       </div>
 
       {/* Dashboard Stats Grid */}
-      <div className="grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {statCards.map((card) => (
           <div
             key={card.title}
-            className="bg-white p-[15px] rounded-lg shadow-[0_1px_3px_rgba(0,0,0,0.1)] flex items-center gap-[15px] cursor-pointer transition-all duration-200 hover:-translate-y-[3px] hover:shadow-[0_4px_8px_rgba(0,0,0,0.1)]"
+            className="bg-white p-[15px] rounded-lg shadow-custom flex items-center gap-[15px] cursor-pointer transition-all duration-200 hover:-translate-y-[3px] hover:shadow-hover"
             onClick={() => handleCardClick(card.navigate)}
           >
             <div
-              className="text-2xl p-3 rounded-full text-white flex items-center justify-center w-[24px] h-[24px]"
-              style={{ backgroundColor: card.bgColor }}
+              className={`text-2xl p-3 rounded-full text-white flex items-center justify-center w-[24px] h-[24px] ${
+                card.icon === 'fa-file-invoice-dollar' ? 'bg-warning' :
+                card.icon === 'fa-chart-line' ? 'bg-success' :
+                card.icon === 'fa-file-alt' ? 'bg-peter-river' :
+                card.icon === 'fa-user-check' ? 'bg-wisteria' :
+                card.icon === 'fa-calendar-alt' ? 'bg-turquoise' :
+                card.icon === 'fa-calendar-times' ? 'bg-danger' : ''
+              }`}
             >
               <i className={`fas ${card.icon}`}></i>
             </div>
@@ -146,9 +152,9 @@ function Dashboard() {
       </div>
 
       {/* Dashboard Sections Grid */}
-      <div className="grid gap-5 mt-5" style={{ gridTemplateColumns: '1fr 1fr' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
         {/* Today's Schedule */}
-        <div className="bg-white p-5 rounded-lg shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
+        <div className="bg-white p-5 rounded-lg shadow-custom">
           <h3 className="mt-0 mb-[15px] text-base font-semibold">Today's Schedule</h3>
           <div>
             {todaysSchedule.length > 0 ? (
@@ -172,7 +178,7 @@ function Dashboard() {
         </div>
 
         {/* Recent Enquiries */}
-        <div className="bg-white p-5 rounded-lg shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
+        <div className="bg-white p-5 rounded-lg shadow-custom">
           <h3 className="mt-0 mb-[15px] text-base font-semibold">Recent Enquiries</h3>
           <div>
             {recentEnquiries.length > 0 ? (
@@ -188,18 +194,16 @@ function Dashboard() {
                   </div>
                   <div className="text-right">
                     <div
-                      className="px-[10px] py-1 rounded-xl text-[11px] font-medium text-white text-center whitespace-nowrap inline-block"
-                      style={{
-                        backgroundColor:
-                          enquiry.status === 'Draft' ? '#778899' :
-                          enquiry.status === 'Quotation Sent' ? '#f39c12' :
-                          enquiry.status === 'Agreement Pending' ? '#16a085' :
-                          enquiry.status === 'Agreement Sent' ? '#e67e22' :
-                          enquiry.status === 'Pending Nomination' ? '#8e44ad' :
-                          enquiry.status === 'Nominated' ? '#3498db' :
-                          enquiry.status === 'Scheduled' ? '#27ae60' :
-                          enquiry.status === 'Completed' ? '#34495e' : '#778899'
-                      }}
+                      className={`px-[10px] py-1 rounded-xl text-[11px] font-medium text-white text-center whitespace-nowrap inline-block ${
+                        enquiry.status === 'Draft' ? 'bg-slate-gray' :
+                        enquiry.status === 'Quotation Sent' ? 'bg-warning' :
+                        enquiry.status === 'Agreement Pending' ? 'bg-turquoise' :
+                        enquiry.status === 'Agreement Sent' ? 'bg-carrot-orange' :
+                        enquiry.status === 'Pending Nomination' ? 'bg-wisteria' :
+                        enquiry.status === 'Nominated' ? 'bg-peter-river' :
+                        enquiry.status === 'Scheduled' ? 'bg-success' :
+                        enquiry.status === 'Completed' ? 'bg-wet-asphalt' : 'bg-slate-gray'
+                      }`}
                     >
                       {enquiry.status}
                     </div>
