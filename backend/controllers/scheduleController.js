@@ -34,6 +34,23 @@ exports.getAllSchedules = async (req, res) => {
   }
 };
 
+exports.getScheduleById = async (req, res) => {
+  try {
+    const schedule = await Schedule.findById(req.params.id)
+      .populate('enquiry', 'client')
+      .populate('room', 'name')
+      .populate('trainer', 'name');
+
+    if (!schedule) {
+      return res.status(404).json({ success: false, message: 'Schedule not found' });
+    }
+
+    res.json({ success: true, data: schedule });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 exports.getWeeklySchedule = async (req, res) => {
   try {
     const { week } = req.query;
